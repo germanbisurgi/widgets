@@ -1,0 +1,7 @@
+@import "reset.css";
+@import "bootstrap.css";
+
+.pdf-object {
+    width: 100%;
+    height: 100vh;
+}

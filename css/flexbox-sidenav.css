@@ -1,0 +1,31 @@
+@import "reset.css";
+@import "bootstrap.css";
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.flex-sidenav {
+    background-color: lightblue;
+    width: 0;
+    transition: all 0.3s ease;
+}
+
+.flex-sidenav.open {
+    background-color: lightblue;
+    height: 50vh;
+    width: 30vw;
+    padding: 15px;
+}
+
+.flex-content {
+    background-color: lightcoral;
+    height: 50vh;
+    width: 70vw;
+    padding: 15px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aspect-ratio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/flexbox-sidenav.css">
+</head>
+<body>
+    <div class="container">
+        <div class="flex-container">
+            <div class="flex-sidenav">
+                <ul>
+                    <li><a href="#">lorem ipsum</a></li>
+                    <li><a href="#">lorem ipsum</a></li>
+                    <li><a href="#">lorem ipsum</a></li>
+                </ul>
+            </div>
+            <div class="flex-content">
+                <button class="flex-sidenav-toggle">toggle</button>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eius enim neque, nobis repellendus rerum saepe sapiente tempora. Asperiores aut dolorum esse illum laudantium placeat qui sunt voluptate voluptates, voluptatum?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eius enim neque, nobis repellendus rerum saepe sapiente tempora. Asperiores aut dolorum esse illum laudantium placeat qui sunt voluptate voluptates, voluptatum?</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var flexSidenavToggle = document.querySelector('.flex-sidenav-toggle')
+        var flexSidenav = document.querySelector('.flex-sidenav')
+        flexSidenavToggle.addEventListener('click', function () {
+          flexSidenav.classList.toggle('open')
+        })
+        console.log(flexSidenav)
+    </script>
+</body>
+</html>

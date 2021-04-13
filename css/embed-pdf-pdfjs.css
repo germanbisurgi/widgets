@@ -1,0 +1,48 @@
+@import "reset.css";
+@import "bootstrap.css";
+
+.pdf-container {
+    height: 100%;
+    position: relative;
+}
+
+.pdf-container .pdf-prev {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.pdf-container .pdf-next {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.pdf-container .pdf-prev,
+.pdf-container .pdf-next,
+.pdf-container .pdf-open {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 30px;
+    padding: 4px 0 0 0;
+    text-align: center;
+    width: 30px;
+    z-index: 20;
+}
+
+.pdf-container canvas {
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.pdf-container.pdf-container-thumbnail {
+    overflow: hidden;
+}
+
+.pdf-container.pdf-container-thumbnail canvas:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}

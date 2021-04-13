@@ -1,3 +1,6 @@
+@import "reset.css";
+@import "bootstrap.css";
+
 .aspect-ratio-container {
     position: relative;
     width: 100%;

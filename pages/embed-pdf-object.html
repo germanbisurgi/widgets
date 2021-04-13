@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>embed pdf with object</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/embed-pdf-object.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <section>
+            <h2>Relative path</h2>
+            <object class="pdf-object" data="../pdf/sample-pdf.pdf" type="application/pdf"></object>
+        </section>
+
+        <section>
+            <h2>Absolute path</h2>
+            <object class="pdf-object" data="http://infolab.stanford.edu/pub/papers/google.pdf" type="application/pdf"></object>
+        </section>
+    </div>
+</body>
+</html>
