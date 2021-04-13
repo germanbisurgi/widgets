@@ -10,11 +10,14 @@
     <div class="container">
         <div class="flex-container">
             <div class="flex-sidenav">
-                <ul>
-                    <li><a href="#">lorem ipsum</a></li>
-                    <li><a href="#">lorem ipsum</a></li>
-                    <li><a href="#">lorem ipsum</a></li>
-                </ul>
+                <div class="flex-sidenav-inner">
+                    <button class="flex-sidenav-toggle">toggle</button>
+                    <ul>
+                        <li><a href="#">lorem ipsum</a></li>
+                        <li><a href="#">lorem ipsum</a></li>
+                        <li><a href="#">lorem ipsum</a></li>
+                    </ul>
+                </div>
             </div>
             <div class="flex-content">
                 <button class="flex-sidenav-toggle">toggle</button>
@@ -25,12 +28,14 @@
     </div>
 
     <script>
-        var flexSidenavToggle = document.querySelector('.flex-sidenav-toggle')
+        var flexSidenavToggles = Array.prototype.slice.call(document.querySelectorAll('.flex-sidenav-toggle'))
         var flexSidenav = document.querySelector('.flex-sidenav')
-        flexSidenavToggle.addEventListener('click', function () {
-          flexSidenav.classList.toggle('open')
+
+        flexSidenavToggles.forEach(function (flexSidenavToggle) {
+          flexSidenavToggle.addEventListener('click', function () {
+            flexSidenav.classList.toggle('open')
+          })
         })
-        console.log(flexSidenav)
     </script>
 </body>
 </html>

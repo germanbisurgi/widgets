@@ -16,16 +16,20 @@ ul {
     transition: all 0.3s ease;
 }
 
+.flex-sidenav-inner {
+    width: 20vw;
+    padding: 15px;
+}
+
 .flex-sidenav.open {
     background-color: lightblue;
     height: 50vh;
-    width: 30vw;
-    padding: 15px;
+    width: 20vw;
 }
 
 .flex-content {
     background-color: lightcoral;
     height: 50vh;
-    width: 70vw;
+    width: 80vw;
     padding: 15px;
 }
