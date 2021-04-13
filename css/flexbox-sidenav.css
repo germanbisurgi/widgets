@@ -17,19 +17,19 @@ ul {
 }
 
 .flex-sidenav-inner {
-    width: 20vw;
+    width: 20%;
     padding: 15px;
 }
 
 .flex-sidenav.open {
     background-color: lightblue;
     height: 50vh;
-    width: 20vw;
+    width: 20%;
 }
 
 .flex-content {
     background-color: lightcoral;
     height: 50vh;
-    width: 80vw;
+    width: 80%;
     padding: 15px;
 }
