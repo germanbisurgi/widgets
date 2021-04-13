@@ -28,12 +28,14 @@
     </div>
 
     <script>
-        var flexSidenavToggles = Array.prototype.slice.call(document.querySelectorAll('.flex-sidenav-toggle'))
-        var flexSidenav = document.querySelector('.flex-sidenav')
+        window.addEventListener('DOMContentLoaded', function () {
+          var flexSidenavToggles = Array.prototype.slice.call(document.querySelectorAll('.flex-sidenav-toggle'))
+          var flexSidenav = document.querySelector('.flex-sidenav')
 
-        flexSidenavToggles.forEach(function (flexSidenavToggle) {
-          flexSidenavToggle.addEventListener('click', function () {
-            flexSidenav.classList.toggle('open')
+          flexSidenavToggles.forEach(function (flexSidenavToggle) {
+            flexSidenavToggle.addEventListener('click', function () {
+              flexSidenav.classList.toggle('open')
+            })
           })
         })
     </script>

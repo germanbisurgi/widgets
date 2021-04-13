@@ -9,13 +9,23 @@
 <body>
     <div class="container-fluid">
         <section>
+            <h2>Issues</h2>
+            <ul>
+                <li>no IE support</li>
+            </ul>
+        </section>
+        <section>
             <h2>Relative path</h2>
-            <object class="pdf-object" data="../pdf/sample-pdf.pdf" type="application/pdf"></object>
+            <object class="pdf-object" data="../pdf/sample-pdf.pdf" type="application/pdf">
+                <p>Your browser does not support this feature</p>
+            </object>
         </section>
 
         <section>
             <h2>Absolute path</h2>
-            <object class="pdf-object" data="http://infolab.stanford.edu/pub/papers/google.pdf" type="application/pdf"></object>
+            <object class="pdf-object" data="http://infolab.stanford.edu/pub/papers/google.pdf" type="application/pdf">
+                <p>Your browser does not support this feature</p>
+            </object>
         </section>
     </div>
 </body>
