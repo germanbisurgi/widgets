@@ -1,3 +1,3 @@
 # Widgets
 
-My test environment when creating widgets 
+A test environment for creating widgets 
