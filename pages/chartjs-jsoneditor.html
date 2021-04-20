@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>aspect-ratio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div id="json-editor-form"></div>
+        </div>
+        <div class="col-xs-12 col-md-6">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+<script>
+    window.addEventListener('load', function () {
+
+      // ----------------------------------------------------------- json-editor
+
+      var defaultSchema = {
+        'title': 'ChartJs',
+        'type': 'object',
+        'properties': {
+          'type': {
+            'type': 'string',
+            'title': 'Type',
+            'default': 'bar',
+            'enum': [
+              'bar'
+            ]
+          },
+          'labels': {
+            'type': 'array',
+            'format': 'tabs',
+            'title': 'Labels',
+            'default': ['Red', 'Blue'],
+            'items': {
+              'type': 'string',
+              'title': 'Label',
+              "headerTemplate": "{{ self }}"
+            }
+          },
+          'datasets': {
+            'type': 'array',
+            'format': 'tabs',
+            'title': 'Datasets',
+            'items': {
+              'type': 'object',
+              'title': 'Dataset'
+            }
+          }
+        }
+      }
+
+      var defaultOptions = {
+        iconlib: 'fontawesome5',
+        object_layout: 'normal',
+        schema: defaultSchema,
+        show_errors: 'interaction',
+        theme: 'bootstrap4',
+        required_by_default: true
+      }
+
+      var jsonEditorForm = document.querySelector('#json-editor-form')
+      var jsoneditor = new window.JSONEditor(jsonEditorForm, defaultOptions)
+
+      // -------------------------------------------------------------- chart.js
+
+      var ctx = document.getElementById('myChart').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+
+    })
+</script>
+</body>
+</html>
