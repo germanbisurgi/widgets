@@ -10,14 +10,16 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-md-7">
+        <div class="col-xs-12 col-md-12">
             <div class="form-group">
-                <label for="example-data-select">Example data suitted for:</label>
+                <label for="example-data-select">Set example data suitted for:</label>
                 <select class="form-control" id="example-data-select">
-                    <option value="A">Bar, Line and Radar</option>
-                    <option value="B">Radar, Doughnut, Pie, and PolarArea</option>
+                    <option value="A">Bar, Line or Radar</option>
+                    <option value="B">Radar, Doughnut, Pie, or PolarArea</option>
                 </select>
             </div>
+        </div>
+        <div class="col-xs-12 col-md-7">
             <div id="json-editor-form"></div>
         </div>
         <div class="col-xs-12 col-md-5">
@@ -55,7 +57,7 @@
       // multiple dataset: polar area
 
       var defaultSchema = {
-        'title': 'ChartJs',
+        'title': 'JSONEditor',
         'type': 'object',
         'compact': true,
         'properties': {
@@ -78,7 +80,7 @@
                 'Radar',
                 'Doughnut',
                 'Pie',
-                'PolarArea'
+                'Polar Area'
               ]
             }
           },
