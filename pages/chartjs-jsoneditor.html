@@ -14,7 +14,7 @@
             <div id="json-editor-form"></div>
             <div class="form-group">
                 <label for="json-editor-value">JSON Editor Value</label>
-                <textarea class="form-control rounded-0" id="json-editor-value" rows="50"></textarea>
+                <textarea class="form-control rounded-0" id="json-editor-value" rows="25"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
@@ -30,39 +30,43 @@
 
       // ----------------------------------------------------------- json-editor
 
+      // recommendations
+      // bar: (single dataset) (single or multiple background),
+      // bar: (multiple dataset) (single background),
+      // line: (single and same border/background color)
+      // polar area, doughnut & pie : (single dataset with multiple background colors)
+      // radar: transparency backgrounds,
+      // bubble
+      // scatter
+
+      // single color: bars radar, and lines
+      // multiple colors: donut and pie
+
+      // single dataset: polar area
+      // multiple dataset: polar area
+
       var startval = {
-        type: 'line',
+        type: 'bar',
         data: {
+          labels: ['React', 'Angular', 'Vue'],
           datasets: [
             {
-              label: 'Chrome',
-              backgroundColor: '#0080ff',
-              borderColor: '#0080ff',
-              color: '#0080ff',
-              data: [
-                {x: 'A', y: 115},
-                {x: 'B', y: 99},
-                {x: 'C', y: 20},
-                {x: 'D', y: 56},
-                {x: 'E', y: 45},
-                {x: 'F', y: 87},
-                {x: 'G', y: 12},
-              ]
+              label: '2020',
+              data: [125850, 143122, 138825],
+              // backgroundColor: ["rgba(0, 40, 240, 0.3)", "rgba(255, 0, 0, 0.3)", "rgba(63, 0.357, 78, 0.3)"],
+              backgroundColor: "rgba(0, 40, 240, 0.1)",
+              borderColor: 'rgba(0, 40, 240, 1)',
+              color: 'rgba(0, 0, 0, 0.3)',
+              borderWidth: 1
             },
             {
-              label: 'Firefox',
-              backgroundColor: '#ff9400',
-              borderColor: '#ff9400',
-              color: '#ff9400',
-              data: [
-                {x: 'A', y: 90},
-                {x: 'B', y: 80},
-                {x: 'C', y: 44},
-                {x: 'D', y: 25},
-                {x: 'E', y: 70},
-                {x: 'F', y: 36},
-                {x: 'G', y: 56},
-              ]
+              label: '2021',
+              data: [135850, 132212, 148825],
+              // backgroundColor: ["rgba(18,101,135,1)", "rgba(21,149,117,1)", "rgba(53,69,101,1)"],
+              backgroundColor: "rgba(255, 0, 0, 0.1)",
+              borderColor: "rgba(255, 0, 0, 1)",
+              color: 'rgba(0, 0, 0, 0.3)',
+              borderWidth: 1
             }
           ]
         }
@@ -71,6 +75,7 @@
       var defaultSchema = {
         'title': 'ChartJs',
         'type': 'object',
+        'compact': true,
         'properties': {
           'type': {
             'type': 'string',
@@ -80,15 +85,22 @@
               'bar',
               'line',
               // 'bubble',
-              // 'doughnut',
-              // 'polarArea',
-              // 'radar',
-              // 'scatter',
+              'doughnut',
+              'pie',
+              'polarArea',
+              'radar',
+              // 'scatter'
             ],
             'options': {
               'enum_titles': [
-                'Bar Chart',
-                'Line Chart',
+                'Bar',
+                'Line',
+                // 'Bubble',
+                'Doughnut',
+                'Pie',
+                'PolarArea',
+                'Radar',
+                // 'Scatter'
               ]
             }
           },
@@ -96,6 +108,15 @@
             'title': 'Data',
             'type': 'object',
             'properties': {
+              'labels': {
+                'type': 'array',
+                'title': 'Labels',
+                'format': 'table',
+                'items': {
+                  'type': 'string',
+                  'title': 'Labels',
+                }
+              },
               'datasets': {
                 'type': 'array',
                 'format': 'tabs',
@@ -103,7 +124,6 @@
                 'items': {
                   'type': 'object',
                   'headerTemplate': '{{ self.label }}',
-                  'description': 'A dataset is a structured collection of data generally associated with a unique body of work.',
                   'properties': {
                     'label': {
                       'type': 'string',
@@ -112,45 +132,100 @@
                     },
                     'data': {
                       'type': 'array',
-                      'format': 'tabs',
+                      'format': 'table',
                       'title': 'Dataset Data',
-                      'description': 'Data are observations or measurements (unprocessed or processed) represented as text, numbers, or multimedia.',
                       'items': {
-                        'type': 'object',
-                        'headerTemplate': '{{ self.x }}',
-                        'properties': {
-                          'x': {
-                            'type': 'string',
-                            'title': 'X',
-                          },
-                          'y': {
-                            'type': 'integer',
-                            "title": "Y"
-                          }
-                        }
+                        'type': 'integer',
+                        'title': 'Values'
                       }
                     },
                     'backgroundColor': {
-                      'type': 'string',
-                      'title': 'Background color',
-                      'default': '#158e66',
-                      'description': 'Background color in Hexadecimal, RGB, or HSL',
+                      'title': 'Background',
+                      "anyOf":[
+                        {
+                          "$ref":"#/definitions/singleColor",
+                        },
+                        {
+                          "$ref":"#/definitions/singleColorPicker",
+                        },
+                        {
+                          "$ref":"#/definitions/multipleColor",
+                        },
+                        {
+                          "$ref":"#/definitions/multipleColorPicker",
+                        }
+                      ]
                     },
                     'borderColor': {
-                      'type': 'string',
-                      'title': 'Background color',
-                      'default': '#158e66',
-                      'description': 'Border color in Hexadecimal, RGB, or HSL',
+                      "title": "Border Color",
+                      "anyOf":[
+                        {
+                          "$ref":"#/definitions/singleColor",
+                        },
+                        {
+                          "$ref":"#/definitions/singleColorPicker",
+                        },
+                        {
+                          "$ref":"#/definitions/multipleColor",
+                        },
+                        {
+                          "$ref":"#/definitions/multipleColorPicker",
+                        }
+                      ]
                     },
                     'color': {
-                      'type': 'string',
-                      'title': 'Background color',
-                      'default': '#158e66',
-                      'description': 'Font color in Hexadecimal, RGB, or HSL',
+                      "title": "Font Color",
+                      "anyOf":[
+                        {
+                          "$ref":"#/definitions/singleColor",
+                        },
+                        {
+                          "$ref":"#/definitions/singleColorPicker",
+                        }
+                      ]
+                    },
+                    'borderWidth': {
+                      'type': 'number',
+                      'title': 'Border With',
+                      'default': 1
                     }
                   }
                 }
               }
+            }
+          }
+        },
+        "definitions": {
+          "singleColor": {
+            'type': 'string',
+            'title': 'Single color',
+            'description': 'Background color in Hexadecimal, RGB, or HSL',
+          },
+          "multipleColor": {
+            'type': 'array',
+            'title': 'Multiple color',
+            'format': 'table',
+            'items': {
+              'type': 'string',
+              'title': 'Background color',
+              'description': 'Background color in Hexadecimal, RGB, or HSL',
+            }
+          },
+          "singleColorPicker": {
+            'type': 'string',
+            'title': 'Single color picker',
+            'format': 'color',
+            'description': 'Background color in Hexadecimal, RGB, or HSL',
+          },
+          "multipleColorPicker": {
+            'type': 'array',
+            'title': 'Multiple color pickers',
+            'format': 'table',
+            'items': {
+              'type': 'string',
+              'title': 'Background color',
+              'format': 'color',
+              'description': 'Background color in Hexadecimal, RGB, or HSL',
             }
           }
         }
