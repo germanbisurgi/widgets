@@ -57,70 +57,70 @@
       // multiple dataset: polar area
 
       var defaultSchema = {
-        'title': 'JSONEditor',
-        'type': 'object',
-        'compact': true,
-        'properties': {
-          'type': {
-            'type': 'string',
-            'title': 'Chart type',
-            'default': 'bar',
-            'enum': [
-              'bar',
-              'line',
-              'radar',
-              'doughnut',
-              'pie',
-              'polarArea'
+        "title": "JSONEditor",
+        "type": "object",
+        "compact": true,
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Chart type",
+            "default": "bar",
+            "enum": [
+              "bar",
+              "line",
+              "radar",
+              "doughnut",
+              "pie",
+              "polarArea"
             ],
-            'options': {
-              'enum_titles': [
-                'Bar',
-                'Line',
-                'Radar',
-                'Doughnut',
-                'Pie',
-                'Polar Area'
+            "options": {
+              "enum_titles": [
+                "Bar",
+                "Line",
+                "Radar",
+                "Doughnut",
+                "Pie",
+                "Polar Area"
               ]
             }
           },
-          'data': {
-            'title': 'Data',
-            'type': 'object',
-            'properties': {
-              'labels': {
-                'type': 'array',
-                'title': 'Labels',
-                'format': 'table',
-                'items': {
-                  'type': 'string',
-                  'title': 'Labels',
+          "data": {
+            "title": "Data",
+            "type": "object",
+            "properties": {
+              "labels": {
+                "type": "array",
+                "title": "Labels",
+                "format": "table",
+                "items": {
+                  "type": "string",
+                  "title": "Labels",
                 }
               },
-              'datasets': {
-                'type': 'array',
-                'format': 'tabs',
-                'title': 'Datasets',
-                'items': {
-                  'type': 'object',
-                  'headerTemplate': '{{ self.label }}',
-                  'properties': {
-                    'label': {
-                      'type': 'string',
-                      'title': 'Dataset label',
-                      'default': 'My dataset label',
+              "datasets": {
+                "type": "array",
+                "format": "tabs",
+                "title": "Datasets",
+                "items": {
+                  "type": "object",
+                  "headerTemplate": "{{ self.label }}",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "title": "Dataset label",
+                      "default": "My dataset label",
                     },
-                    'data': {
-                      'type': 'array',
-                      'format': 'table',
-                      'title': 'Dataset Data',
-                      'items': {
-                        'type': 'integer',
-                        'title': 'Values'
+                    "data": {
+                      "type": "array",
+                      "format": "table",
+                      "title": "Dataset Data",
+                      "items": {
+                        "type": "integer",
+                        "title": "Values"
                       }
                     },
-                    'backgroundColor': {
-                      'title': 'Background Color',
+                    "backgroundColor": {
+                      "title": "Background Color",
                       "anyOf":[
                         {
                           "$ref":"#/definitions/singleColor",
@@ -136,7 +136,7 @@
                         }
                       ]
                     },
-                    'borderColor': {
+                    "borderColor": {
                       "title": "Border Color",
                       "anyOf":[
                         {
@@ -153,7 +153,7 @@
                         }
                       ]
                     },
-                    'color': {
+                    "color": {
                       "title": "Font Color",
                       "anyOf":[
                         {
@@ -164,10 +164,10 @@
                         }
                       ]
                     },
-                    'borderWidth': {
-                      'type': 'number',
-                      'title': 'Border With',
-                      'default': 1
+                    "borderWidth": {
+                      "type": "number",
+                      "title": "Border With",
+                      "default": 1
                     }
                   }
                 }
@@ -177,35 +177,35 @@
         },
         "definitions": {
           "singleColor": {
-            'type': 'string',
-            'title': 'Single color',
-            'description': 'Background color in Hexadecimal, RGB, or HSL',
+            "type": "string",
+            "title": "Single color",
+            "description": "Background color in Hexadecimal, RGB, or HSL",
           },
           "multipleColor": {
-            'type': 'array',
-            'title': 'Multiple color',
-            'format': 'table',
-            'items': {
-              'type': 'string',
-              'title': 'Background color',
-              'description': 'Background color in Hexadecimal, RGB, or HSL',
+            "type": "array",
+            "title": "Multiple color",
+            "format": "table",
+            "items": {
+              "type": "string",
+              "title": "Background color",
+              "description": "Background color in Hexadecimal, RGB, or HSL",
             }
           },
           "singleColorPicker": {
-            'type': 'string',
-            'title': 'Single color picker',
-            'format': 'color',
-            'description': 'Background color in Hexadecimal, RGB, or HSL',
+            "type": "string",
+            "title": "Single color picker",
+            "format": "color",
+            "description": "Background color in Hexadecimal, RGB, or HSL",
           },
           "multipleColorPicker": {
-            'type': 'array',
-            'title': 'Multiple color pickers',
-            'format': 'table',
-            'items': {
-              'type': 'string',
-              'title': 'Background color',
-              'format': 'color',
-              'description': 'Background color in Hexadecimal, RGB, or HSL',
+            "type": "array",
+            "title": "Multiple color pickers",
+            "format": "table",
+            "items": {
+              "type": "string",
+              "title": "Background color",
+              "format": "color",
+              "description": "Background color in Hexadecimal, RGB, or HSL",
             }
           }
         }
