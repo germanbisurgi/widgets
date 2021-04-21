@@ -10,15 +10,24 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-7">
+            <div class="form-group">
+                <label for="example-data-select">Example data suitted for:</label>
+                <select class="form-control" id="example-data-select">
+                    <option value="A">Bar, Line and Radar</option>
+                    <option value="B">Radar, Doughnut, Pie, and PolarArea</option>
+                </select>
+            </div>
             <div id="json-editor-form"></div>
+        </div>
+        <div class="col-xs-12 col-md-5">
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-xs-12 col-md-12">
             <div class="form-group">
                 <label for="json-editor-value">JSON Editor Value</label>
                 <textarea class="form-control rounded-0" id="json-editor-value" rows="25"></textarea>
             </div>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <canvas id="myChart" width="400" height="400"></canvas>
         </div>
     </div>
 </div>
@@ -45,33 +54,6 @@
       // single dataset: polar area
       // multiple dataset: polar area
 
-      var startval = {
-        type: 'bar',
-        data: {
-          labels: ['React', 'Angular', 'Vue'],
-          datasets: [
-            {
-              label: '2020',
-              data: [125850, 143122, 138825],
-              // backgroundColor: ["rgba(0, 40, 240, 0.3)", "rgba(255, 0, 0, 0.3)", "rgba(63, 0.357, 78, 0.3)"],
-              backgroundColor: "rgba(0, 40, 240, 0.1)",
-              borderColor: 'rgba(0, 40, 240, 1)',
-              color: 'rgba(0, 0, 0, 0.3)',
-              borderWidth: 1
-            },
-            {
-              label: '2021',
-              data: [135850, 132212, 148825],
-              // backgroundColor: ["rgba(18,101,135,1)", "rgba(21,149,117,1)", "rgba(53,69,101,1)"],
-              backgroundColor: "rgba(255, 0, 0, 0.1)",
-              borderColor: "rgba(255, 0, 0, 1)",
-              color: 'rgba(0, 0, 0, 0.3)',
-              borderWidth: 1
-            }
-          ]
-        }
-      }
-
       var defaultSchema = {
         'title': 'ChartJs',
         'type': 'object',
@@ -84,23 +66,19 @@
             'enum': [
               'bar',
               'line',
-              // 'bubble',
+              'radar',
               'doughnut',
               'pie',
-              'polarArea',
-              'radar',
-              // 'scatter'
+              'polarArea'
             ],
             'options': {
               'enum_titles': [
                 'Bar',
                 'Line',
-                // 'Bubble',
+                'Radar',
                 'Doughnut',
                 'Pie',
-                'PolarArea',
-                'Radar',
-                // 'Scatter'
+                'PolarArea'
               ]
             }
           },
@@ -231,6 +209,50 @@
         }
       }
 
+      var exampleDataA = {
+        type: 'bar',
+        data: {
+          labels: ['React', 'Angular', 'Vue'],
+          datasets: [
+            {
+              label: '2020',
+              data: [125850, 143122, 138825],
+              backgroundColor: "rgba(0, 40, 240, 0.1)",
+              borderColor: 'rgba(0, 40, 240, 1)',
+              color: 'rgba(0, 0, 0, 0.3)',
+              borderWidth: 1
+            },
+            {
+              label: '2021',
+              data: [135850, 132212, 148825],
+              backgroundColor: "rgba(255, 0, 0, 0.1)",
+              borderColor: "rgba(255, 0, 0, 1)",
+              color: 'rgba(0, 0, 0, 0.3)',
+              borderWidth: 1
+            }
+          ]
+        }
+      }
+
+      var exampleDataB = {
+        type: 'bar',
+        data: {
+          labels: ['React', 'Angular', 'Vue'],
+          datasets: [
+            {
+              label: '2020',
+              data: [125850, 143122, 138825],
+              backgroundColor: ["rgba(0, 40, 240, 0.3)", "rgba(255, 0, 0, 0.3)", "rgba(63, 157, 78, 0.3)"],
+              borderColor: 'rgba(0, 40, 240, 1)',
+              color: 'rgba(0, 0, 0, 0.3)',
+              borderWidth: 1
+            }
+          ]
+        }
+      }
+
+
+
       var defaultOptions = {
         iconlib: 'fontawesome5',
         object_layout: 'normal',
@@ -242,7 +264,7 @@
         disable_edit_json: true,
         disable_properties: true,
         remove_button_labels: true,
-        startval: startval
+        startval: exampleDataA
       }
 
       var jsonEditorForm = document.querySelector('#json-editor-form')
@@ -270,6 +292,16 @@
         startMyChart()
         jsonEditorValue.value = JSON.stringify(jsoneditor.getValue(), null, 2)
       })
+
+      // -------------------------------------------------------------- set data
+
+      var exampleDataSelect = document.querySelector('#example-data-select')
+
+      exampleDataSelect.addEventListener('change', function () {
+        var exampleData = exampleDataSelect.value === 'A' ? exampleDataA : exampleDataB
+        jsoneditor.setValue(exampleData)
+      })
+
     })
 </script>
 </body>
