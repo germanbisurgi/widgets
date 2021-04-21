@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/nonmin/jsoneditor.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.js" integrity="sha512-aWx9jeVTj8X49UzUnUHGIlo6rNne1xNsCny/lL0QwUTQK2eilrHXpSk9xbRm4FJ4eLi2XBmnFlRkWPoChSx8bA==" crossorigin="anonymous"></script>
 <script>
     window.addEventListener('load', function () {
@@ -251,8 +251,6 @@
         }
       }
 
-
-
       var defaultOptions = {
         iconlib: 'fontawesome5',
         object_layout: 'normal',
@@ -299,7 +297,10 @@
 
       exampleDataSelect.addEventListener('change', function () {
         var exampleData = exampleDataSelect.value === 'A' ? exampleDataA : exampleDataB
-        jsoneditor.setValue(exampleData)
+        console.log(exampleData.data)
+        var dataEditor = jsoneditor.getEditor('root.data')
+        console.log(dataEditor)
+        dataEditor.setValue(exampleData.data)
       })
 
     })
