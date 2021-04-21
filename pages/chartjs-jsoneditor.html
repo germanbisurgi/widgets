@@ -288,6 +288,7 @@
 
       jsoneditor.on('change', function () {
         startMyChart()
+        console.log('change')
         jsonEditorValue.value = JSON.stringify(jsoneditor.getValue(), null, 2)
       })
 
@@ -297,10 +298,8 @@
 
       exampleDataSelect.addEventListener('change', function () {
         var exampleData = exampleDataSelect.value === 'A' ? exampleDataA : exampleDataB
-        console.log(exampleData.data)
-        var dataEditor = jsoneditor.getEditor('root.data')
-        console.log(dataEditor)
-        dataEditor.setValue(exampleData.data)
+        exampleData.type = jsoneditor.getValue().type
+        jsoneditor.setValue(exampleData)
       })
 
     })
