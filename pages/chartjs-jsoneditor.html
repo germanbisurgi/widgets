@@ -41,213 +41,48 @@
 
       // ----------------------------------------------------------- json-editor
 
-      // recommendations
-      // bar: (single dataset) (single or multiple background),
-      // bar: (multiple dataset) (single background),
-      // line: (single and same border/background color)
-      // polar area, doughnut & pie : (single dataset with multiple background colors)
-      // radar: transparency backgrounds,
-      // bubble
-      // scatter
-
-      // single color: bars radar, and lines
-      // multiple colors: donut and pie
-
-      // single dataset: polar area
-      // multiple dataset: polar area
 
       var defaultSchema = {
-        "title": "JSONEditor",
-        "type": "object",
-        "compact": true,
-        "properties": {
-          "type": {
-            "type": "string",
-            "title": "Chart type",
-            "default": "bar",
-            "enum": [
-              "bar",
-              "line",
-              "radar",
-              "doughnut",
-              "pie",
-              "polarArea"
-            ],
-            "options": {
-              "enum_titles": [
-                "Bar",
-                "Line",
-                "Radar",
-                "Doughnut",
-                "Pie",
-                "Polar Area"
-              ]
-            }
-          },
-          "data": {
-            "title": "Data",
-            "type": "object",
-            "properties": {
-              "labels": {
-                "type": "array",
-                "title": "Labels",
-                "format": "table",
-                "items": {
-                  "type": "string",
-                  "title": "Labels",
-                }
-              },
-              "datasets": {
-                "type": "array",
-                "format": "tabs",
-                "title": "Datasets",
-                "items": {
-                  "type": "object",
-                  "headerTemplate": "{{ self.label }}",
-                  "properties": {
-                    "label": {
-                      "type": "string",
-                      "title": "Dataset label",
-                      "default": "My dataset label",
-                    },
-                    "data": {
-                      "type": "array",
-                      "format": "table",
-                      "title": "Dataset Data",
-                      "items": {
-                        "type": "integer",
-                        "title": "Values"
-                      }
-                    },
-                    "backgroundColor": {
-                      "title": "Background Color",
-                      "anyOf":[
-                        {
-                          "$ref":"#/definitions/singleColor",
-                        },
-                        {
-                          "$ref":"#/definitions/singleColorPicker",
-                        },
-                        {
-                          "$ref":"#/definitions/multipleColor",
-                        },
-                        {
-                          "$ref":"#/definitions/multipleColorPicker",
-                        }
-                      ]
-                    },
-                    "borderColor": {
-                      "title": "Border Color",
-                      "anyOf":[
-                        {
-                          "$ref":"#/definitions/singleColor",
-                        },
-                        {
-                          "$ref":"#/definitions/singleColorPicker",
-                        },
-                        {
-                          "$ref":"#/definitions/multipleColor",
-                        },
-                        {
-                          "$ref":"#/definitions/multipleColorPicker",
-                        }
-                      ]
-                    },
-                    "color": {
-                      "title": "Font Color",
-                      "anyOf":[
-                        {
-                          "$ref":"#/definitions/singleColor",
-                        },
-                        {
-                          "$ref":"#/definitions/singleColorPicker",
-                        }
-                      ]
-                    },
-                    "borderWidth": {
-                      "type": "number",
-                      "title": "Border With",
-                      "default": 1
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "definitions": {
-          "singleColor": {
-            "type": "string",
-            "title": "Single color",
-            "description": "Background color in Hexadecimal, RGB, or HSL",
-          },
-          "multipleColor": {
-            "type": "array",
-            "title": "Multiple color",
-            "format": "table",
-            "items": {
-              "type": "string",
-              "title": "Background color",
-              "description": "Background color in Hexadecimal, RGB, or HSL",
-            }
-          },
-          "singleColorPicker": {
-            "type": "string",
-            "title": "Single color picker",
-            "format": "color",
-            "description": "Background color in Hexadecimal, RGB, or HSL",
-          },
-          "multipleColorPicker": {
-            "type": "array",
-            "title": "Multiple color pickers",
-            "format": "table",
-            "items": {
-              "type": "string",
-              "title": "Background color",
-              "format": "color",
-              "description": "Background color in Hexadecimal, RGB, or HSL",
-            }
-          }
-        }
+        "$ref": "../json/chartjs-schema.json"
       }
 
       var exampleDataA = {
-        type: 'bar',
-        data: {
-          labels: ['React', 'Angular', 'Vue'],
-          datasets: [
+        "type": "bar",
+        "data": {
+          "labels": ["React", "Angular", "Vue"],
+          "datasets": [
             {
-              label: '2020',
-              data: [125850, 143122, 138825],
-              backgroundColor: "rgba(0, 40, 240, 0.1)",
-              borderColor: 'rgba(0, 40, 240, 1)',
-              color: 'rgba(0, 0, 0, 0.3)',
-              borderWidth: 1
+              "label": "2020",
+              "data": [125850, 143122, 138825],
+              "backgroundColor": "rgba(0, 40, 240, 0.1)",
+              "borderColor": "rgba(0, 40, 240, 1)",
+              "color": "rgba(0, 0, 0, 0.3)",
+              "borderWidth": 1
             },
             {
-              label: '2021',
-              data: [135850, 132212, 148825],
-              backgroundColor: "rgba(255, 0, 0, 0.1)",
-              borderColor: "rgba(255, 0, 0, 1)",
-              color: 'rgba(0, 0, 0, 0.3)',
-              borderWidth: 1
+              "label": "2021",
+              "data": [135850, 132212, 148825],
+              "backgroundColor": "rgba(255, 0, 0, 0.1)",
+              "borderColor": "rgba(255, 0, 0, 1)",
+              "color": "rgba(0, 0, 0, 0.3)",
+              "borderWidth": 1
             }
           ]
         }
       }
 
       var exampleDataB = {
-        type: 'bar',
-        data: {
-          labels: ['React', 'Angular', 'Vue'],
-          datasets: [
+        "type": "bar",
+        "data": {
+          "labels": ["React", "Angular", "Vue"],
+          "datasets": [
             {
-              label: '2020',
-              data: [125850, 143122, 138825],
-              backgroundColor: ["rgba(0, 40, 240, 0.3)", "rgba(255, 0, 0, 0.3)", "rgba(63, 157, 78, 0.3)"],
-              borderColor: 'rgba(0, 0, 0, 1)',
-              color: 'rgba(0, 0, 0, 0.3)',
-              borderWidth: 1
+              "label": "2020",
+              "data": [125850, 143122, 138825],
+              "backgroundColor": ["rgba(0, 40, 240, 0.3)", "rgba(255, 0, 0, 0.3)", "rgba(63, 157, 78, 0.3)"],
+              "borderColor": "rgba(0, 0, 0, 1)",
+              "color": "rgba(0, 0, 0, 0.3)",
+              "borderWidth": 1
             }
           ]
         }
@@ -259,6 +94,7 @@
         schema: defaultSchema,
         show_errors: 'interaction',
         theme: 'bootstrap4',
+        ajax: true,
         required_by_default: true,
         disable_collapse: true,
         disable_edit_json: true,
