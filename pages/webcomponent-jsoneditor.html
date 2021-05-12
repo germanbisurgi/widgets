@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSONEditor + Web Component</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+</head>
+<body>
+<div class="container">
+    <json-editor></json-editor>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/nonmin/jsoneditor.js"></script>
+<script>
+    window.addEventListener('load', function () {
+
+      class JSONEditorWebComponent extends HTMLElement {
+        constructor () {
+          super()
+
+          const shadow = this.attachShadow({mode: 'open'});
+
+          const root = document.createElement('div');
+          root.setAttribute('id', 'json-editor')
+          new JSONEditor(root, {
+            theme: 'bootstrap4',
+            iconlib: 'fontawesome5',
+            schema: {
+              'type': 'object',
+              'title': 'JSON editor web component',
+              'properties': {
+               ' string': {
+                 'type': 'string',
+                 'title': 'String'
+               }
+              }
+            }
+          })
+
+          const links = Array.prototype.slice.call(document.querySelectorAll('link'))
+          const styleLinks = links.filter((link) => link.getAttribute('rel') === 'stylesheet')
+
+          styleLinks.forEach((styleLink) => {
+            shadow.appendChild(styleLink.cloneNode(true))
+          })
+
+          shadow.appendChild(root);
+        }
+      }
+
+      customElements.define('json-editor', JSONEditorWebComponent);
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+@import "reset.css";
+@import "bootstrap.css";
+
+.animation {
+
+}
+
+.animation:hover {
+
+}
+
+.animation-trigger {
+
+}
+
+.animation-object {
+    opacity: 0;
+    padding: 10px;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    transform: translate(0%, -50%) scale(1, 0);
+    z-index: 1;
+}
