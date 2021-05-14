@@ -9,17 +9,23 @@ var PDFWidget = function (container) {
   this.totalPages = 0
   this.currentPage = 0
 
-  this.prev.addEventListener('click', (e) => {
-    if (this.currentPage !== 1) {
-      this.showPage(--this.currentPage)
-    }
-  })
+  if (this.prev) {
+    this.prev.addEventListener('click', (e) => {
+      e.stopPropagation()
+      if (this.currentPage !== 1) {
+        this.showPage(--this.currentPage)
+      }
+    })
+  }
 
-  this.next.addEventListener('click', (e) => {
-    if (this.currentPage !== this.totalPages) {
-      this.showPage(++this.currentPage)
-    }
-  })
+  if (this.next) {
+    this.next.addEventListener('click', (e) => {
+      e.stopPropagation()
+      if (this.currentPage !== this.totalPages) {
+        this.showPage(++this.currentPage)
+      }
+    })
+  }
 }
 
 PDFWidget.prototype.getInternetExplorerVersion = function () {
@@ -53,7 +59,7 @@ PDFWidget.prototype.showPDF = async function () {
   }
 
   try {
-    this.pdfDocument = await pdfjsLib.getDocument({ url: this.pdfUrl })
+    this.pdfDocument = await pdfjsLib.getDocument({ url: this.pdfUrl }).promise
   } catch (error) {
     console.error(error.message)
   }
@@ -65,8 +71,12 @@ PDFWidget.prototype.showPage = async function (pageNumber) {
   this.currentPage = pageNumber
 
   // disable Previous & Next buttons while page is being loaded
-  this.next.disabled = true
-  this.prev.disabled = true
+  if (this.next) {
+    this.next.disabled = true
+  }
+  if (this.prev) {
+    this.prev.disabled = true
+  }
 
   // get handle of page
   try {
@@ -76,7 +86,7 @@ PDFWidget.prototype.showPage = async function (pageNumber) {
   }
 
   // original width of the pdf page at scale 1
-  var pdfOriginalWidth = page.getViewport(1).width
+  var pdfOriginalWidth = page.getViewport({ scale: 1 }).width
 
   // as the canvas is of a fixed width we need to adjust the scale of the viewport where page is rendered
   var mod = 2
@@ -85,7 +95,7 @@ PDFWidget.prototype.showPage = async function (pageNumber) {
   var scaleRequired = this.canvas.width / pdfOriginalWidth
 
   // get viewport to render the page at required scale
-  var viewport = page.getViewport(scaleRequired)
+  var viewport = page.getViewport({ scale: scaleRequired })
 
   // set canvas height same as viewport height
   this.canvas.height = viewport.height
@@ -98,11 +108,15 @@ PDFWidget.prototype.showPage = async function (pageNumber) {
 
   // render the page contents in the canvas
   try {
-    await page.render(renderContext)
+    await page.render(renderContext).promise
   } catch (error) {
     console.error(error.message)
   }
 
-  this.next.disabled = false
-  this.prev.disabled = false
+  if (this.next) {
+    this.next.disabled = false
+  }
+  if (this.prev) {
+    this.prev.disabled = false
+  }
 }
